@@ -33,9 +33,10 @@ public class SungJukV3 {
         String fmt =
                 "이름 : %s\n국어: %d\n영어: %d\n수학: %d\n총점: %d\n평균: %.2f\n학점: %c\n";
 
+        Scanner sc = new Scanner(System.in);
         //처리
         for(int i=0; i<3; i++) {
-                Scanner sc = new Scanner(System.in);
+
                 System.out.println((i+1) + "번째 학생 성적 입력중..");
 
                 System.out.print("이름을 입력하세요 : "); //print->는 줄바꿈을 안한다
@@ -43,12 +44,18 @@ public class SungJukV3 {
 
                 System.out.print("국어 점수를 입력하세요 : ");
                 kor[i] = sc.nextInt(); //nextInt();-> 정수형 입력 받을때 (참고 실수형은 nextDouble();)
-
+                //kor[i] = Integer.parseInt(sc.nextLine()); -> 앞부분 이름을 두번째 입력할때 건너뛰는 현상을 방지하기 위한 두번째 방법
                 System.out.print("영어 점수를 입력하세요 : ");
                 eng[i] = sc.nextInt();
-
+                //kor[i] = Integer.parseInt(sc.nextLine()); -> 앞부분 이름을 두번째 입력할때 건너뛰는 현상을 방지하기 위한 두번째 방법
                 System.out.print("수학 점수를 입력하세요 : ");
                 mat[i] = sc.nextInt();
+                //kor[i] = Integer.parseInt(sc.nextLine()); -> 앞부분 이름을 두번째 입력할때 건너뛰는 현상을 방지하기 위한 두번째 방법
+
+                sc.skip("\r\n|[\n\r]"); //엔터키 문자를 무시한다는 의미
+                //수학 성적 입력시 같이 입력된 enter키가 다음데이터(이름) 입력시 입력값으로 자동 전달됨
+                //그러한 상황을 해결 하기 위해 미리 엔터키를 제거하는 코드를 삽입
+
             }
 
         //처리
