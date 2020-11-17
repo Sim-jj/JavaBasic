@@ -43,7 +43,7 @@ public class SungJukV1 {
         System.out.println("수학 : " + mat);
         System.out.println("--------------");
         System.out.println("총점 : " + sum);
-        System.out.format("평균 : %2f \n",mean); //소수점 2자릿수까지만 표현하고 싶기 때문에
+        System.out.format("평균 : %.2f \n",mean); //소수점 2자릿수까지만 표현하고 싶기 때문에
         System.out.println("학점 : " + grd);
     }
 }
