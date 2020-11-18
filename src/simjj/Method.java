@@ -76,8 +76,37 @@ public class Method {
         System.out.println("---------------------");
         computerNum(8,10);
         System.out.println("---------------------");
+        computerAllsum(1,5);
         computerAllsum(5,1);
+        computerAllsum2(1,5);
 
+
+        /*computerAllsum메소드의 시험코드
+        int x = 1;
+        int y = 5;
+        int sum = 0;
+
+        for(int i=x; i<= y; i++) {
+            sum += i;
+        }
+
+        x = 5;
+        y = 1;
+
+        //5+4+3+2+1
+        for(int i=x; i>= y; i--) {
+            sum += i;
+        }
+
+        // 최소값 / 최대값을 정해줘야한다
+        int min = x;
+        int max = y;
+
+        if(x>y) min = x; max = y;
+
+        for(int i = min; i<= max; i++){
+            sum += i;
+        }*/
     }
     // 간단한 인사말 출력 메서드
     // public : 접근제한자, 외부 클래스의 메서드를 사용허가여부 (어떤 클래스던지 이 메소드를 호출할 수 있다)
@@ -117,14 +146,11 @@ public class Method {
     // ? × ? = ?
     // ? ÷ ? = ?
     public static void computerNum(int num, int num2){
-        int sum = num + num2;
-        int mid = num - num2;
-        int mul = num * num2;
-        int avg = num / num2;
-        System.out.println( num + "과" + num2 + "의 합은 : " + sum );
-        System.out.println( num + "과" + num2 + "의 빼기는 : " + mid );
-        System.out.println( num + "과" + num2 + "의 곱하기는 : " + mul );
-        System.out.println( num + "과" + num2 + "의 나누기는 : " + avg );
+
+        System.out.println( num + "과" + num2 + "의 합은 : " + (num+num2) );
+        System.out.println( num + "과" + num2 + "의 빼기는 : " + (num-num2) );
+        System.out.println( num + "과" + num2 + "의 곱하기는 : " + (num*num2) );
+        System.out.println( num + "과" + num2 + "의 나누기는 : " + (num/num2) );
     }
 
     // 두개의 정수를 매개변수로 선언하고 두 정수를 범위로 설정해서 그것의
@@ -133,17 +159,34 @@ public class Method {
 
     public static void computerAllsum(int num, int num2){
         int sum = 0;
+        int min = num; //최소값
+        int max = num2; //최대값
+        String fmt = "%d ~ %d의 정수 범위 총합 : %d \n";
+        if(num>num2) { // num이 num2보다 큰 수의 경우
+            min = num2; // 최소값에 num2를 넣어라
+            max = num; // 최대값에 num을 넣어라
+            }
 
-        if(num<num2) {
-            for(int i=0;num<=num2;i++){
-                sum = num + (num+i);
+        for(int i=min;i<=max;i++){
+                sum += i;
             }
-        }else if(num>num2){
-            for(int i=0; num2<=num;i++){
-                sum = num2 + (num2+i);
-            }
-        }
-        System.out.println(sum);
+        System.out.printf(fmt, min,max,sum);
     }
 
+    // 두개의 정수를 매개변수로 선언하고 두 정수를 범위로 설정해서 그것의
+    // 가우스 덧셈이용
+    // 모든 합을 구하고 출력하는  : computerAllsum2
+    // ex) 5, 1(매개변수) -> 1+2+3+4+5 = 15
+    public static void computerAllsum2(int num, int num2){
+        int sum = 0;
+        String fmt = "%d ~ %d의 정수 범위 총합 : %d \n";
+
+        if(num2%2 == 0){
+            sum = (1+num)*((1+num2)/2);
+        }else{
+           sum = (1+num)*((1+num2)/2) - (1+num)/2;
+        }
+
+        System.out.printf(fmt, num,num2,sum);
+    }
 }
