@@ -5,4 +5,20 @@ public class Subject {
     String subjName;
     String subjDesc;
     String prof;
+
+    // 기본 생성자
+    public Subject(){
+        subNo = "0211";
+        subjName = "드레스 코드";
+        subjDesc = "옷 입기의 기초";
+        prof = "445";
+    }
+
+    // 매개변수를 이용한 생성자
+    public Subject(String subNo, String subjName, String subjDesc, String prof){
+        this.subNo = subNo;
+        this.subjName = subjName;
+        this.subjDesc = subjDesc;
+        this.prof = prof;
+    }
 }
