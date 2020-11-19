@@ -1,30 +1,11 @@
 package lab;
 
 public class Student {
-        int stuNum;
-        String name;
-        String addres;
-        String birth;
-        String subject;
-        int pro;
-}
 
-class Subject {
-        String subName;
-        String phone;
-        String jobAdd;
-        int stuTop;
-}
-
-class MainSubject {
-        int subNum;
-        String mainSubName;
-        String summary;
-        int mainPro;
-}
-
-class Professor{
-        int proNum;
-        String proName;
-        String chargeSub;
+    int stdNo; //수식으로 사용된다면 정수형 데이터형으로 해야한다
+    String name;
+    String addr;
+    String birth;
+    String dept;
+    String pro; //int 형보다 String형으로 보관하는게 메모리를 덜 잡아먹어서
 }
