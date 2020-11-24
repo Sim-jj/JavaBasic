@@ -14,22 +14,26 @@ import java.util.Scanner;
  */
 public class LoginME {
     public static void main(String[] args) {
-        String userId = "abc123";
-        String userPass = "987xyz";
-        String id,pass;
+        String uId = "abc123"; // 저장된 아이디
+        String pwd = "987xyz"; // 저장된 비밀번호
+        String myUid = ""; // 키보드로 입력받은 값을 저장할 변수
+        String myPwd = ""; // 키보드로 입력받은 값을 저장할 변수
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("아이디를 입력하세요 : ");
-        id = sc.nextLine();
-        System.out.println("비밀번호를 입력하세요 : ");
-        pass = sc.nextLine();
+        while(true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("아이디는? ");
+            myUid = sc.nextLine();
+            System.out.println("비밀번호는? ");
+            myPwd = sc.nextLine();
 
-        if(userId.equals(id) & userPass.equals(pass)){
-            System.out.println("로그인 성공!");
-        }else if(!userId.equals(id) & !userPass.equals(pass)){
-            System.out.println("가입되지 않은 아이디!");
-        }else if(userId.equals(id) & !userPass.equals(pass)) {
-            System.out.println("비밀번호가 틀렸음!");
+            if (!uId.equals(myUid) && !pwd.equals(myPwd)) { // 문자열 값을 비교하기 때문에 equals 메서드 사용
+                System.out.println("가입되지 않은 아이디!");
+            } else if (uId.equals(myUid) && !pwd.equals(myPwd)) {
+                System.out.println("비밀번호가 틀렸음!");
+            } else if (uId.equals(myUid) && pwd.equals(myPwd)) {
+                System.out.println("로그인 성공!");
+                break;
+            }
         }
-    }
-}
+    } // main
+} // class
