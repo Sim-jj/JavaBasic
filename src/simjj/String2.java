@@ -55,27 +55,112 @@ public class String2 {
 
         String number = "123456-123456789";
         String number2 = "987654-4567890";
-        String sub = number.substring(7, 8);
-        String sub2 = number2.substring(7, 8);
+        String gender = number.substring(7, 8);
+        String gender2 = number2.substring(7, 8);
+        String result2 = "";
+        String result3 = "";
 
-        if (sub.equals("1")) {
-            System.out.println("2000년 이전 남성");
-        } else if (sub.equals("2")) {
-            System.out.println("2000년 이전 여성");
-        } else if (sub.equals("3")) {
-            System.out.println("2000년 이후 남성");
-        } else if (sub.equals("4")) {
-            System.out.println("2000년 이후 여성");
+        switch (gender) {
+            case "1":
+                result2 = "2000년 이전 남";
+                break;
+            case "2":
+                result2 = "2000년 이전 여";
+                break;
+            case "3":
+                result2 = "2000년 이후 남";
+                break;
+            case "4":
+                result2 = "2000년 이후 여";
+                break;
         }
+        switch (gender2) {
+            case "1":
+                result3 = "2000년 이전 남";
+                break;
+            case "2":
+                result3 = "2000년 이전 여";
+                break;
+            case "3":
+                result3 = "2000년 이후 남";
+                break;
+            case "4":
+                result3 = "2000년 이후 여";
+                break;
+        }
+        System.out.println(result2);
+        System.out.println(result3);
 
-        if (sub2.equals("1")) {
-            System.out.println("2000년 이전 남성");
-        } else if (sub2.equals("2")) {
-            System.out.println("2000년 이전 여성");
-        } else if (sub2.equals("3")) {
-            System.out.println("2000년 이후 남성");
-        } else if (sub2.equals("4")) {
-            System.out.println("2000년 이후 여성");
-        }
+        // 지정한 위치의 문자 추출 메서드 : charAt (추출할 글자가 한개일때)
+        str = "123456-1234567";
+        System.out.println(str.charAt(7));
+
+        // 정규표현식에 따라 일치여부 확인 메서드 : matches
+        // 정규식 사용가능 메서드 : split, replaceAll
+        int num = 1234567;
+        String str1 = String.format("%d", num);
+        String str2 = "1234567";
+        System.out.println(str1.matches(str2));
+
+        System.out.println(str1.matches("[a-z].+")); // str1에 a-z까지 반복되느냐 , +의 의미는 반복되느냐 의미
+        System.out.println(str1.matches("[0-9].+")); // 0~9 사이 숫자 하나라도 포함되어있느냐
+
+        // 정규표현식 regular expression
+        // 특정한 규칙을 가진 문자열의 집합을 표현하기 위해 사용하는 형식언어, -는 두 문자 사이의 범위표현
+        // [] : 문자집합이나 범위를 나타냄
+        // [0-9] : 숫자
+        // [a-zA-z] : 영문자
+        // [가-힣] : 한글
+        // * : 0번 이상 무한개의 임의의 문자 반복
+        // ab* : ab, aba, ab1, ...
+        // + : 1번 이상 무한개의 임의의 문자 반복
+        // ab+ : aba, ab1, abA, abaa, ...
+        // ? : 0번 또는 1개의 임의의 문자 반복
+        // ab? : aba, abb, ... ab0, abZ, abz
+        // {n, m} : 최소 n개 이상 m개 이하 반복
+        // [0-9]{3,4} : 123, 987, 1234, 9876
+        // ^ : 문자열 시작
+        // ^123 :  123으로 시작하는 문자열 의미
+        // % : 문자열 끝
+        // 123$ : 123으로 끝나는 문자열 의미
+        // 1234567890
+        // abcdefjhijklmnopqrstuvwxyz
+        // 가나다라마바사아자차카타파하
+        // . : 임의의 문자를 의미
+        // .{3, } : 문자의 최소길이는 3임
+
+        // 다음 문자열이 전화번호형식에 맞게 작성되었는지 알아보는 정규식을 작성하세요
+        // 010-123-4567, 011-1234-5678
+
+        System.out.println();
+        String phone = "010-123-4567";
+        String pattern1 = "[0-9]{3}-[0-9]{3}-[0-9]{4}"; // 정규표현식 첫번째 [010]{3자리}-[123]{3자리}-[4567]{4자리} 란 의미
+        System.out.println(phone.matches(pattern1));
+
+        phone = "011-1234-5678";
+        pattern1 = "[0-9]{3}-[0-9]{4}-[0-9]{4}"; // 첫번째 [010]
+        System.out.println(phone.matches(pattern1));
+
+        // ex) 사용자 아이디가 다음 규칙제 적합하게 작성되었는지 확인
+        // 영문자 소문자/대문자, 숫자, 특수기호
+        // abc123!XYZ , 123jkl
+        System.out.println();
+        String uId = "abc123!XYZ";
+        String uId2 = "123jkl";
+        String pattern2 = "[a-zA-z0-9!]+"; // a~z,A~Z,0~9,!가 들어가있는지 확인
+
+        System.out.println(uId.matches(pattern2));
+        System.out.println(uId.matches(pattern2));
+
+        // 첫글자는 영문자 소문자/대문자
+        // 두번째 숫자, 특수기호()등이 포함
+        // 최소 길이는 6~18자
+        // abc123!XYZ , 123jkl
+        //String uId3 = "abc123!XYZ";
+        String uId3 = "a12345678901234567";
+        String pattern3 = "^[a-zA-z][a-zA-Z0-9!]{5,17}+"; //^[a-zA-z][a-zA-Z0-9!]{6,18} -> ^[a-zA-z] : 첫글자는 영문자 소문자/대문자
+                                                          //[a-zA-Z0-9!] : 두번째 글자부터는 숫자,영문자,특수기호 등포함
+                                                          // {5,17} : 6~18자 란 의미(문자열 첫글자 자리번호는 0이기 때문에)
+        System.out.println(uId.matches(pattern3));
     }
 }
