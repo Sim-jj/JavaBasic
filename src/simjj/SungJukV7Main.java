@@ -5,12 +5,12 @@ import java.util.Scanner;
 /**
  * 파일명 : sungJukV7Main
  * 작성일 : 2020.11.23
- * <p>
+ *
  * 프로그램 설명: 성적처리프로그램 v7
  * 중간고사와 기말고사 성적처리 프로그램을 만들려고 함
  * SungJukV1을 토대로 중간고사 성적과 기말고사 성적 클래스를
  * 인터페이스를 이용해서 작성하세요
- * <p>
+ *
  * 부모클래스는 SungJukV7
  * 인터페이스 ISungJukV7
  * 중간고사MidSungJuk2 : 국어kor,영어eng,수학nat
@@ -21,20 +21,20 @@ import java.util.Scanner;
  */
 public class SungJukV7Main {
     public static void main(String[] args) {
-        MidSungJuk2 mid = new MidSungJuk2();
-        FinalSungJuk2 fina = new FinalSungJuk2();
+        MidSungJuk2 msj2 = new MidSungJuk2();
+        FinalSungJuk2 fsj2 = new FinalSungJuk2();
 
-        mid.readSungJuk();
-        mid.computeSungJuk();
-        mid. printSungJuk();
+        msj2.readSungJuk();
+        msj2.computeSungJuk();
+        msj2. printSungJuk();
 
-        fina.readSungJuk();
-        fina.computeSungJuk();
-        fina. printSungJuk();
+        fsj2.readSungJuk();
+        fsj2.computeSungJuk();
+        fsj2. printSungJuk();
     }
 }
 
-class SungJukV7 {
+abstract class SungJukV7 {
     protected String name;
     protected int kor;
     protected int eng;
@@ -153,10 +153,8 @@ class MidSungJuk2 extends SungJukV7 implements ISungJukV7 {
 
     @Override
     public void printSungJuk() {
-        String fmt =
-                "이름 : %s\n 국어 : %d\n 영어 : %d\n 수학 : %d\n"
-                        + "총점 : %d\n 평균 : %.1f\n 학점 : %s\n";
-
+        System.out.println("중간고사 결과");
+        String fmt = "이름 : %s\n국어: %d\n영어: %d\n수학: %d\n총점: %d\n평균: %.2f\n학점: %c\n";
         String result = String.format(fmt, name, kor, eng, mat, sum, mean, grd);
 
         System.out.println(result);
@@ -172,7 +170,7 @@ class FinalSungJuk2 extends SungJukV7 implements ISungJukV7 {
     }
 
     public FinalSungJuk2(String name, int kor, int eng, int mat, int art, int sci) {
-        super(name, kor, eng, mat);
+        super(name, kor, eng, mat); // 부모클래스의 멤버변수를 상속받아서 super(매개변수명) 사용
         this.art = art;
         this.sci = sci;
     }
@@ -193,6 +191,7 @@ class FinalSungJuk2 extends SungJukV7 implements ISungJukV7 {
         art = sc.nextInt();
         System.out.print("과학 점수를 입력하세요 : ");
         sci = sc.nextInt();
+        System.out.println();
     }
 
     @Override
@@ -207,10 +206,8 @@ class FinalSungJuk2 extends SungJukV7 implements ISungJukV7 {
 
     @Override
     public void printSungJuk() {
-        String fmt =
-                "이름 : %s\n 국어 : %d\n 영어 : %d\n 수학 : %d\n"
-                        + "과학 : %d\n 미술 : %d\n"
-                        + "총점 : %d\n 평균 : %.1f\n 학점 : %s\n";
+        System.out.println("기말고사 결과");
+        String fmt = "이름 : %s\n국어: %d\n영어: %d\n수학: %d\n미술: %d\n과학: %d\n총점: %d\n평균: %.2f\n학점: %c\n";
 
         String result = String.format(fmt, name, kor, eng, mat, sci, art, sum, mean, grd);
 
