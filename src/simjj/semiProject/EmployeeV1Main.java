@@ -2,6 +2,10 @@ package simjj.semiProject;
 
 import java.util.Scanner;
 
+/**
+ * EmployeeV1Main
+ * 인사정보 관리프로그램 진입점
+ */
 public class EmployeeV1Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

@@ -1,18 +1,25 @@
 package simjj.semiProject;
 
+/**
+ * 인사 정보 프로그램
+ * 사번empId, 이름fName, 성lName, 이메일email, 전화번호phone,
+ * 입사일hDate, 사원번호jobId, 연봉sal, 커미션cmm, 상사번호mgrId, 부서번호deptId
+ */
 public class EmployeeVO {
-    int empId;
-    String fName;
-    String lName;
-    String email;
-    String phone;
-    String hDate;
-    String jobId;
-    int sal;
-    double cmm;
-    int mgrId;
-    int deptId;
+    // 멤버변수
+    private int empId;
+    private String fName;
+    private String lName;
+    private String email;
+    private String phone;
+    private String hDate;
+    private String jobId;
+    private int sal;
+    private double cmm;
+    private int mgrId;
+    private int deptId;
 
+    // 생성자
     public EmployeeVO() { }
 
     public EmployeeVO(int empId, String fName, String lName, String email, String phone, String hDate,
