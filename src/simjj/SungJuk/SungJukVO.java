@@ -23,6 +23,14 @@ public class SungJukVO {
     public SungJukVO() {
     }
     // 매개변수를 이용한 생성자
+
+    public SungJukVO(String name, int kor, int eng, int mat) {
+        this.name = name;
+        this.kor = kor;
+        this.eng = eng;
+        this.mat = mat;
+    }
+
     public SungJukVO(String name, int kor, int eng, int mat, int sum, double mean, char grd) {
         this.name = name;
         this.kor = kor;
