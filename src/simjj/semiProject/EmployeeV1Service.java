@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class EmployeeV1Service extends EmployeeV1Generic {
     List<EmployeeVO> empl = new ArrayList<>();
+   // 입력받은 인사정보 데이터를 저장하는 변수
+    EmployeeVO emvo = null;
 
     /**
      * 인사정보 처리 UI 출력
@@ -70,7 +72,7 @@ public class EmployeeV1Service extends EmployeeV1Generic {
         emp.setDeptId(Integer.parseInt(sc.nextLine()));
 
         // 스캐너로 입력받은 데이터를 VO클래스 넘겨줌(저장)
-        EmployeeVO emvo = new EmployeeVO(emp.getEmpId(), emp.getfName(), emp.getlName(), emp.getEmail(), emp.getPhone(),
+        emvo = new EmployeeVO(emp.getEmpId(), emp.getfName(), emp.getlName(), emp.getEmail(), emp.getPhone(),
                                          emp.gethDate(), emp.getJobId(), emp.getSal(), emp.getCmm(), emp.getMgrId(),
                                          emp.getDeptId());
 
