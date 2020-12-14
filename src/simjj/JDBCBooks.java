@@ -10,60 +10,66 @@ public class JDBCBooks {
     // 입력은 Scanner 이용
 
     public static void main(String[] args) {
-
         // 1. 도서정보 입력
-        int key = 11;
-        String sql = "";
-        Statement stmt = null;;
-
         Scanner sc = new Scanner(System.in);
-        System.out.println("책 제목을 입력하세요");
+        String sql = "";
+
+        System.out.println("도서번호는?");
+        int bookid = Integer.parseInt(sc.nextLine());
+        System.out.println("도서 제목은?");
         String name = sc.nextLine();
-
-        System.out.println("출판사를 입력하세요");
+        System.out.println("도서 출판사는?");
         String pub = sc.nextLine();
-
-        System.out.println("가격을 입력하세요");
-        int price = sc.nextInt();
+        System.out.println("도서 가격은?");
+        int price = Integer.parseInt(sc.nextLine());
 
         // 2. 입력받은 도서정보를 Books테이블에 저장하는 SQL문작성
-        StringBuffer sbf = new StringBuffer(); // appnen 메소드를 사용하기 위한(테스트용)
-        sql = "insert into Books values (" + key + "," + name + "," + pub + "," + price  + ")";
+        // insert into Books values(10,'자바','더조은',1000)
+        // insert into Books values(bookid,bookname,pub,price)
+        sql = "insert into books values (" + bookid + ",'" + name + "','" + pub + "'," + price  + ")";
+
         System.out.println(sql);
 
-        sbf.append("insert into Books values (") // 테스트용
-                .append(key).append(",").append(name).append(",")
-                .append(pub).append(",").append(price).append(")");
+        // 3. 생성한 sql문을 JDBC를 통해 실행
+        String DRV = "org.mariadb.jdbc.Driver"; // 외우기
+        String URL = "jdbc:mariadb://mariadb.cgvl3q0iympc.ap-northeast-2.rds.amazonaws.com:3306/playground";
+        String USR = "playground";
+        String PWD = "playground2020";
 
-        System.out.println(sbf); // 테스트용
-
-        // 3. JDBC 드라이버를 메모리에 적재함
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
+        // a) JDBC드라이버 초기화화
+       try {
+            Class.forName(DRV); // 드라이브를 메모리에 올려두는 처리
         } catch (ClassNotFoundException cnf) {
             System.out.println("JDBC 드라이버를 설치하세요");
         }
 
-        // 4. 데이터베이스 서버에 접속하기
+        // b) 데이터베이스 서버에 접속하기
         Connection conn = null;
-        String url = "jdbc:mariadb://"
-                + "mariadb.cgvl3q0iympc.ap-northeast-2.rds.amazonaws.com"
-                + ":3306/playground";
+
         try {
-            conn = DriverManager.getConnection( // 데이터베이스에서 연결객체 가져오기
-                    url,
-                    "playground",
-                    "playground2020");
-            if(!conn.isClosed()){ System.out.println("데이터베이스 접속 성공"); }
-
-            stmt =  conn.createStatement();
-            ResultSet srs = stmt.executeQuery(sql);
-
-        } catch (SQLException sqlex) {
+            conn = DriverManager.getConnection( // 데이터베이스에 접속하겠단 의미
+                    URL, USR, PWD);
+        } catch (SQLException se) {
             System.out.println("디비접속 주소나 아이디/비번을 확인해주세요");
         }
 
+        // c) SQL문 객체를 생성하고 서버로 전송해서 실행함
+        Statement stmt = null; // SQL문 처리용 Statement 객체 생성
 
+        try {
+            stmt = conn.createStatement(); // 데이터베이스로 sql문을 넘겨주기위한 사전처리
+            Boolean isfail = stmt.execute(sql); // 질의문이 잘들어갔는지 참이면 isfail에게 반환
+            if(!isfail) System.out.println("데이터 추가완료!");
 
+        } catch (SQLException throwables) {
+            System.out.println("JDBC - SQL 실행오류!!");
+        }
+
+        // d) JDBC 관련 객체는 메모리에서 제거
+        if (stmt != null) { // 나중에 만든 객체를 먼저 닫는다
+            try { stmt.close(); } catch (SQLException se) { } }
+        if (conn != null) {
+            try { conn.close(); } catch (SQLException se) { }
+        }
     }
 }
